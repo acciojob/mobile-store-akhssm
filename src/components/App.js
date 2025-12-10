@@ -32,7 +32,7 @@ export default function App() {
         </Route>
 
         <Route path="/products/:id">
-          <ProductDetails products={products} />
+          <ProductDetails products={products} setProducts={setProducts} />
         </Route>
 
         <Route path="/admin">

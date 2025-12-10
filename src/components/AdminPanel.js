@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function AdminPanel({ products, setProducts }) {
-  const [form, setForm] = useState({ name: "", price: "", description: "", image: "" });
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    description: "",
+    image: ""
+  });
 
   function addProduct() {
     if (!form.name || !form.price || !form.image) return;
@@ -20,7 +25,9 @@ export default function AdminPanel({ products, setProducts }) {
   }
 
   function updatePrice(id, newPrice) {
-    setProducts(products.map(p => p.id === id ? { ...p, price: Number(newPrice) } : p));
+    setProducts(products.map(p =>
+      p.id === id ? { ...p, price: Number(newPrice) } : p
+    ));
   }
 
   function deleteProduct(id) {
@@ -32,28 +39,18 @@ export default function AdminPanel({ products, setProducts }) {
       <h2>Admin Panel</h2>
 
       <div className="admin-form">
-        <input className="form-control" placeholder="Name"
-          value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
-
-        <input className="form-control" placeholder="Description"
-          value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
-
-        <input className="form-control" placeholder="Image URL"
-          value={form.image} onChange={e => setForm({ ...form, image: e.target.value })} />
-
-        <input className="form-control" placeholder="Price" type="number"
-          value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
-
+        <input className="form-control" placeholder="Name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
+        <input className="form-control" placeholder="Description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
+        <input className="form-control" placeholder="Image URL" value={form.image} onChange={e => setForm({ ...form, image: e.target.value })} />
+        <input className="form-control" placeholder="Price" type="number" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
         <button onClick={addProduct}>Add</button>
       </div>
 
-      {/* Cypress expects UL/LI/A */}
       <ul>
-        {products.map((item, index) => (
-          <li key={item.id}>
-            <Link to={`/product/${item.id}`}>
-              {item.name}
-            </Link>
+        {products.map(item => (
+          <li key={item.id} style={{ marginBottom: 12 }}>
+
+            <Link to={`/products/${item.id}`}>{item.name}</Link>
 
             <input
               className="form-control"
@@ -62,7 +59,10 @@ export default function AdminPanel({ products, setProducts }) {
               onBlur={e => updatePrice(item.id, e.target.value)}
             />
 
-            <button onClick={() => deleteProduct(item.id)}>Delete</button>
+            <button className="float-right" onClick={() => deleteProduct(item.id)}>
+              Delete
+            </button>
+
           </li>
         ))}
       </ul>

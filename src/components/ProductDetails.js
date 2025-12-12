@@ -25,11 +25,11 @@ export default function ProductDetails({ products, setProducts }) {
       <p>{product.description}</p>
       <p>Price: {product.price}</p>
 
-      <button id="update-btn" className="btn" onClick={updateProduct} data-cy="detail-update">Update</button>
-      <button id="remove-btn" className="btn" onClick={removeProduct} data-cy="detail-remove">Remove</button>
+      <button id="update-btn" className="btn" onClick={updateProduct}>Update</button>
+      <button id="remove-btn" className="btn" onClick={removeProduct}>Remove</button>
 
       <br /><br />
-      <button className="btn" onClick={() => history.push('/')} data-cy="detail-back">Back</button>
+      <button className="btn" onClick={() => history.push('/')}>Back</button>
     </div>
   );
 }

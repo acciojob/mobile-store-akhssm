@@ -6,23 +6,17 @@ export default function ProductList({ products }) {
     <div className="container">
       {products.map(item => (
         <div className="col-12" key={item.id} style={{ marginBottom: 12 }}>
+
           <div>
-            <Link
-              to={`/products/${item.id}`}
-              className="product-link"
-              data-cy={`product-${item.id}`}
-            >
-              <div
-                className="row"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 16,
-                  background: '#fff',
-                  padding: 12,
-                  borderBottom: '1px solid #ccc'
-                }}
-              >
+            <Link to={`/products/${item.id}`} className="product-link">
+              <div className="row" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 16,
+                background: '#fff',
+                padding: 12,
+                borderBottom: '1px solid #ccc'
+              }}>
                 <div style={{ width: 90 }}>
                   <img
                     src={item.image}
@@ -38,6 +32,7 @@ export default function ProductList({ products }) {
               </div>
             </Link>
           </div>
+
         </div>
       ))}
     </div>

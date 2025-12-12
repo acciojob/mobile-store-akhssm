@@ -49,20 +49,27 @@ export default function AdminPanel({ products, setProducts }) {
           onChange={e => setForm({ ...form, image: e.target.value })} />
         <input className="form-control" placeholder="Price" type="number" value={form.price}
           onChange={e => setForm({ ...form, price: e.target.value })} />
-        <button className="btn" onClick={addProduct}>Add</button>
+        <button className="btn add-btn" onClick={addProduct} data-cy="admin-add">Add</button>
       </div>
 
       <ul>
-        {products.map(item => (
+        {products.map((item, index) => (
           <li key={item.id} style={{ marginBottom: 12 }}>
-            <Link to={`/products/${item.id}`} className="btn">{item.name}</Link>
+            <Link to={`/products/${item.id}`} className="admin-product-link" data-cy={`admin-product-${item.id}`}>
+              {item.name}
+            </Link>
 
             <input className="form-control"
               type="number"
               defaultValue={item.price}
               onBlur={e => updatePrice(item.id, e.target.value)} />
 
-            <button className="btn float-right" onClick={() => deleteProduct(item.id)}>
+            <button
+              className="btn admin-delete-btn"
+              onClick={() => deleteProduct(item.id)}
+              data-cy={`admin-delete-${item.id}`}
+              style={{ float: 'right' }}
+            >
               Delete
             </button>
           </li>

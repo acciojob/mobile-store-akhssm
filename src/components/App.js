@@ -22,8 +22,8 @@ export default function App() {
   return (
     <Router>
       <nav className="navbar">
-        <Link to="/">HOME</Link>
-        <Link to="/admin">ADMIN</Link>
+        <Link to="/" className="nav-link" data-cy="nav-home">HOME</Link>
+        <Link to="/admin" className="nav-link" data-cy="nav-admin">ADMIN</Link>
       </nav>
 
       <Switch>

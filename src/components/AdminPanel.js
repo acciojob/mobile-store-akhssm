@@ -23,53 +23,30 @@ export default function AdminPanel({ products, setProducts }) {
     <div className="admin-page">
 
       <div className="admin-form">
-        <input
-          className="form-control"
-          placeholder="Name"
-          onChange={e => setForm({ ...form, name: e.target.value })}
-        />
+        <input placeholder="Name" onChange={e => setForm({ ...form, name: e.target.value })} />
+        <input placeholder="Description" onChange={e => setForm({ ...form, description: e.target.value })} />
+        <input placeholder="Image URL" onChange={e => setForm({ ...form, image: e.target.value })} />
+        <input placeholder="Price" onChange={e => setForm({ ...form, price: e.target.value })} />
 
-        <input
-          className="form-control"
-          placeholder="Description"
-          onChange={e => setForm({ ...form, description: e.target.value })}
-        />
-
-        <input
-          className="form-control"
-          placeholder="Image URL"
-          onChange={e => setForm({ ...form, image: e.target.value })}
-        />
-
-        <input
-          className="form-control"
-          placeholder="Price"
-          onChange={e => setForm({ ...form, price: e.target.value })}
-        />
-
-        <button>Add</button>
+        <button className="add-btn" onClick={addProduct}>
+          Add
+        </button>
       </div>
 
-      {products.map((product, index) => (
+      {products.map((product) => (
         <div className="admin-card" key={product.id}>
-
           <div>{product.name}</div>
 
-          {index === 0 && (
-            <>
-              <button
-                className="float-right"
-                onClick={() => deleteProduct(product.id)}
-              >
-                Delete
-              </button>
+          <button
+            className="delete-btn"
+            onClick={() => deleteProduct(product.id)}
+          >
+            Delete
+          </button>
 
-              <button className="float-right">
-                Edit
-              </button>
-            </>
-          )}
-
+          <button className="edit-btn">
+            Edit
+          </button>
         </div>
       ))}
     </div>

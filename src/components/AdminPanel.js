@@ -50,21 +50,25 @@ export default function AdminPanel({ products, setProducts }) {
         <button>Add</button>
       </div>
 
-      {products.map(product => (
+      {products.map((product, index) => (
         <div className="admin-card" key={product.id}>
 
           <div>{product.name}</div>
 
-          <button
-            className="float-right"
-            onClick={() => deleteProduct(product.id)}
-          >
-            Delete
-          </button>
+          {index === 0 && (
+            <>
+              <button
+                className="float-right"
+                onClick={() => deleteProduct(product.id)}
+              >
+                Delete
+              </button>
 
-          <button className="float-right">
-            Edit
-          </button>
+              <button className="float-right">
+                Edit
+              </button>
+            </>
+          )}
 
         </div>
       ))}

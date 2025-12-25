@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 export default function AdminPanel({ products, setProducts }) {
   const [form, setForm] = useState({
@@ -24,28 +23,37 @@ export default function AdminPanel({ products, setProducts }) {
     <div className="admin-page">
 
       <div className="admin-form">
-        <input className="form-control" placeholder="Name"
-          onChange={e => setForm({ ...form, name: e.target.value })} />
+        <input
+          className="form-control"
+          placeholder="Name"
+          onChange={e => setForm({ ...form, name: e.target.value })}
+        />
 
-        <input className="form-control" placeholder="Description"
-          onChange={e => setForm({ ...form, description: e.target.value })} />
+        <input
+          className="form-control"
+          placeholder="Description"
+          onChange={e => setForm({ ...form, description: e.target.value })}
+        />
 
-        <input className="form-control" placeholder="Image URL"
-          onChange={e => setForm({ ...form, image: e.target.value })} />
+        <input
+          className="form-control"
+          placeholder="Image URL"
+          onChange={e => setForm({ ...form, image: e.target.value })}
+        />
 
-        <input className="form-control" placeholder="Price"
-          onChange={e => setForm({ ...form, price: e.target.value })} />
+        <input
+          className="form-control"
+          placeholder="Price"
+          onChange={e => setForm({ ...form, price: e.target.value })}
+        />
 
-        <button onClick={addProduct}>Add</button>
+        <button>Add</button>
       </div>
 
       {products.map(product => (
         <div className="admin-card" key={product.id}>
-          <img src={product.image} alt={product.name} />
 
-          <Link to={`/products/${product.id}`}>
-            {product.name}
-          </Link>
+          <div>{product.name}</div>
 
           <button
             className="float-right"
@@ -57,6 +65,7 @@ export default function AdminPanel({ products, setProducts }) {
           <button className="float-right">
             Edit
           </button>
+
         </div>
       ))}
     </div>

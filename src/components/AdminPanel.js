@@ -1,79 +1,64 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function AdminPanel({ products, setProducts }) {
   const [form, setForm] = useState({
     name: "",
-    price: "",
     description: "",
-    image: ""
+    image: "",
+    price: ""
   });
 
-  function addProduct() {
-    if (!form.name || !form.price || !form.image) return;
-
+  const addProduct = () => {
     setProducts([
       ...products,
-      {
-        id: Date.now(),
-        name: form.name,
-        description: form.description,
-        image: form.image,
-        price: Number(form.price)
-      }
+      { ...form, id: Date.now(), price: Number(form.price) }
     ]);
+  };
 
-    setForm({ name: "", price: "", description: "", image: "" });
-  }
-
-  function updatePrice(id, newPrice) {
-    setProducts(products.map(p =>
-      p.id === id ? { ...p, price: Number(newPrice) } : p
-    ));
-  }
-
-  function deleteProduct(id) {
+  const deleteProduct = (id) => {
     setProducts(products.filter(p => p.id !== id));
-  }
+  };
 
   return (
     <div className="admin-page">
-      <h2>Admin Panel</h2>
 
       <div className="admin-form">
-        <input className="form-control" placeholder="Name" value={form.name}
+        <input className="form-control" placeholder="Name"
           onChange={e => setForm({ ...form, name: e.target.value })} />
-        <input className="form-control" placeholder="Description" value={form.description}
+
+        <input className="form-control" placeholder="Description"
           onChange={e => setForm({ ...form, description: e.target.value })} />
-        <input className="form-control" placeholder="Image URL" value={form.image}
+
+        <input className="form-control" placeholder="Image URL"
           onChange={e => setForm({ ...form, image: e.target.value })} />
-        <input className="form-control" placeholder="Price" type="number" value={form.price}
+
+        <input className="form-control" placeholder="Price"
           onChange={e => setForm({ ...form, price: e.target.value })} />
-        <button className="btn" onClick={addProduct}>Add</button>
+
+        <button onClick={addProduct}>Add</button>
       </div>
 
-      <ul>
-        {products.map(item => (
-          <li key={item.id} className="admin-item" style={{ marginBottom: 12 }}>
-            <Link to={`/products/${item.id}`} className="admin-link">
-              {item.name}
-            </Link>
+      {products.map(product => (
+        <div className="admin-card" key={product.id}>
+          <img src={product.image} alt={product.name} />
 
-            <div className="edit-controls" style={{ marginTop: 8 }}>
-              <input
-                className="form-control"
-                type="number"
-                defaultValue={item.price}
-                onBlur={e => updatePrice(item.id, e.target.value)} />
+          <Link to={`/products/${product.id}`}>
+            {product.name}
+          </Link>
 
-              <button className="btn" onClick={() => deleteProduct(item.id)}>
-                Delete
-              </button>
-            </div>
+          <button
+            className="float-right"
+            onClick={() => deleteProduct(product.id)}
+          >
+            Delete
+          </button>
 
-          </li>
-        ))}
-      </ul>
+          <button className="float-right">
+            Edit
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
